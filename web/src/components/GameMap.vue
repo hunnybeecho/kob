@@ -35,4 +35,8 @@ div.gamemap {
   justify-content: center;
   align-items: center;
 }
+
+canvas {
+  outline: none;
+}
 </style>
