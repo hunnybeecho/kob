@@ -41,27 +41,42 @@
                          :to="{name: 'ranklist_index'}">排行榜</router-link>
           </li>
         </ul>
-        <ul class="navbar-nav">
+        <ul class="navbar-nav"
+            v-if="$store.state.user.is_login">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle"
                href="#"
                role="button"
                data-bs-toggle="dropdown"
                aria-expanded="false">
-              wangzijie
+              {{ $store.state.user.username }}
             </a>
             <ul class="dropdown-menu">
               <li>
                 <router-link class="dropdown-item"
-                             :to="{name: 'userbot_index'}">我的Bot</router-link>
+                             :to="{name: 'user_bot_index'}">我的Bot</router-link>
               </li>
               <li>
                 <router-link class="dropdown-item"
-                             :to="{name: 'profile_index'}">个人中心</router-link>
+                             :to="{name: 'user_profile_index'}">个人中心</router-link>
               </li>
               <li><a class="dropdown-item"
-                   href="#">退出登录</a></li>
+                   href="#"
+                   @click="logout">退出登录</a></li>
             </ul>
+          </li>
+        </ul>
+        <ul class="navbar-nav"
+            v-else>
+          <li class="nav-item">
+            <router-link class="nav-link"
+                         :to="{ name: 'user_account_login' }"
+                         role="button">登录</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link class="nav-link"
+                         :to="{ name: 'user_account_register' }"
+                         role="button">注册</router-link>
           </li>
         </ul>
       </div>
@@ -70,19 +85,20 @@
 </template>
 
 <script>
-// import { useRoute } from 'vue-router'
-// import { computed } from 'vue'
+import { useStore } from 'vuex'
 
-// export default {
-//   setup() {
-//     const route = useRoute()
-//     let route_name = computed(() => route.name)
+export default {
+  setup() {
+    const store = useStore();
+    const logout = () => {
+      store.dispatch("logout");
+    }
 
-//     return {
-//       route_name
-//     }
-//   }
-// }
+    return {
+      logout
+    }
+  }
+}
 </script>
 
 <style scoped>
