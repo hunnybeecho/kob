@@ -110,6 +110,8 @@ export default {
 }
 
 .error_message {
+  height: 10px;
   color: red;
+  font-size: 10px;
 }
 </style>
