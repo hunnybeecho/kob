@@ -39,10 +39,6 @@ public class UpdateBotServiceImpl implements UpdateBotService {
             return map;
         }
 
-        if (description == null || description.length() == 0) {
-            description = "这个用户很懒，什么也没留下~";
-        }
-
         if (description.length() > 300) {
             map.put("error_message", "描述的长度不能超过300");
             return map;

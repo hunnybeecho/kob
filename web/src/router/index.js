@@ -4,7 +4,7 @@ import PkIndexView from '@/views/pk/PkIndexView'
 import RecordIndexView from '@/views/record/RecordIndexView'
 import RanklistIndexView from '@/views/ranklist/RanklistIndexView'
 import UserBotIndexView from '@/views/user/bot/UserBotIndexView'
-import UserProfileIndexView from '@/views/user/profile/UserProfileIndexView'
+import UserAccountProfileView from '@/views/user/account/UserAccountProfileView'
 import NotFound from '@/views/error/NotFound'
 import UserAccountLoginView from '@/views/user/account/UserAccountLoginView'
 import UserAccountRegisterView from '@/views/user/account/UserAccountRegisterView'
@@ -57,9 +57,9 @@ const routes = [
     }
   },
   {
-    path: '/user/profile',
-    name: 'user_profile_index',
-    component: UserProfileIndexView,
+    path: '/user/account/profile',
+    name: 'user_account_profile',
+    component: UserAccountProfileView,
     meta: {
         requestAuth: true,
     }
@@ -109,7 +109,7 @@ router.beforeEach((to, from, next) => {
             success() {
             },
             error() {
-                alert("请重新登录！");
+                // alert("请重新登录！");
                 router.push({ name: "user_account_login" });
                 store.dispatch("logout");
             }
@@ -122,7 +122,7 @@ router.beforeEach((to, from, next) => {
         if (flag === 1) {
             next();
         } else {
-            alert("请先登录！");
+            // alert("请先登录！");
             next({ name: "user_account_login" });
         }
     } else {

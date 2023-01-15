@@ -4,15 +4,17 @@ export default {
     state: {
         id: "",
         username: "",
-        avatar_url: "",
+        avatar: "",
         token: "",
+        description: "",
         is_login: false,
     },
     mutations: {
         updateUser(state, user) {
             state.id = user.id;
             state.username = user.username;
-            state.avatar_url = user.avatar_url;
+            state.avatar = user.avatar;
+            state.description = user.description;
             state.is_login = user.is_login;
         },
         updateToken(state, token) {
@@ -21,7 +23,8 @@ export default {
         logout(state) {
             state.id = "";
             state.username = "";
-            state.avatar_url = "";
+            state.avatar = "";
+            state.description = "";
             state.token = "";
             state.is_login = false;
         },
@@ -75,7 +78,34 @@ export default {
         logout(context) {
             localStorage.removeItem("jwt_token");
             context.commit("logout");
+        },
+        update_password(context, data) {
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:3000/user/account/update-password",
+                data: {
+                    oldPassword: data.old_password,
+                    newPassword: data.new_password,
+                    confirmedPassword: data.confirmed_password,
+                },
+                headers: {
+                    authorization: "Bearer " + context.state.token,
+                },
+                success(resp) {
+                    if (resp.error_message === "success") {
+                        context.commit("updateToken", resp.token);
+                        localStorage.setItem("jwt_token", resp.token);
+                        data.success(resp);
+                    } else {
+                        data.error(resp);
+                    }
+                },
+                error(resp) {
+                    data.error(resp);
+                },
+            });
         }
+
     },
     modules: {
     }

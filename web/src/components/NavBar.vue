@@ -32,7 +32,7 @@
               style=" margin-right: 50px">
             <router-link class="nav-link"
                          active-class="active"
-                         :to="{name: 'record_index'}">对局列表</router-link>
+                         :to="{name: 'record_index'}">对局记录</router-link>
           </li>
           <li class="nav-item"
               style=" margin-right: 50px">
@@ -49,6 +49,8 @@
                role="button"
                data-bs-toggle="dropdown"
                aria-expanded="false">
+              <img :src="$store.state.user.avatar"
+                   class="img-fluid">
               {{ $store.state.user.username }}
             </a>
             <ul class="dropdown-menu"
@@ -59,7 +61,7 @@
               </li>
               <li>
                 <router-link class="dropdown-item"
-                             :to="{name: 'user_profile_index'}">个人中心</router-link>
+                             :to="{name: 'user_account_profile'}">个人中心</router-link>
               </li>
               <li><a class="dropdown-item"
                    href="#"
@@ -103,4 +105,9 @@ export default {
 </script>
 
 <style scoped>
+img {
+  border-radius: 50%;
+  margin-right: 5px;
+  width: 30px;
+}
 </style>

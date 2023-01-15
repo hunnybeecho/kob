@@ -27,6 +27,7 @@ public class RegisterServiceImpl implements RegisterService {
             map.put("error_message", "用户名不能为空");
             return map;
         }
+
         if (password == null || confirmedPassword == null) {
             map.put("error_message", "密码不能为空");
             return map;
@@ -43,8 +44,8 @@ public class RegisterServiceImpl implements RegisterService {
             return map;
         }
 
-        if (username.length() > 100) {
-            map.put("error_message", "用户名长度不能大于100");
+        if (username.length() > 16) {
+            map.put("error_message", "用户名长度不能大于16");
             return map;
         }
 
@@ -67,8 +68,9 @@ public class RegisterServiceImpl implements RegisterService {
         }
 
         String encodedPassword = passwordEncoder.encode(password);
-        String avatar_url = "https://bpic.51yuansu.com/pic3/cover/03/47/97/5badea14c5255_610.jpg";
-        User user = new User(null, username, encodedPassword, avatar_url);
+        String avatar_url = "https://cdn.acwing.com/media/user/profile/photo/133958_lg_d89ab1e544.jpg";
+        String description = "这个用户很懒，什么也没留下~";
+        User user = new User(null, username, encodedPassword, avatar_url, description);
         userMapper.insert(user);
 
         map.put("error_message", "success");
