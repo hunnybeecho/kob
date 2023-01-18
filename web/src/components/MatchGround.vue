@@ -2,7 +2,7 @@
   <div class="matchground">
     <div class="bd-callout bd-callout-warning">
       <p style="font-weight: bold; font-size: 18px">注意事项：</p>
-      <p>您可以选择亲自出马或挑选您的 Bot 出战，当选择亲自出马时，使用 <kbd>W</kbd>、<kbd>A</kbd>、<kbd>S</kbd>、<kbd>D</kbd> 控制方向.</p>
+      <p>您可以选择 `亲自出马` 或挑选 `您的 Bot` 出战，当选择 `亲自出马` 时，使用 <kbd>W</kbd>、<kbd>A</kbd>、<kbd>S</kbd>、<kbd>D</kbd> 控制蛇的移动方向 .</p>
     </div>
     <div class="container content-field">
       <div class="card">
