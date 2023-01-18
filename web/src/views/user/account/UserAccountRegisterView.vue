@@ -1,53 +1,51 @@
 <template>
-  <ContentField>
-    <div class="loginForm">
-      <h2>用户注册</h2>
-      <form @submit.prevent="register">
-        <div class="form-group">
-          <label for="username">用户名</label>
-          <input type="text"
-                 class="form-control"
-                 id="username"
-                 placeholder="请输入用户名"
-                 v-model="username">
-        </div>
-        <div class="form-group">
-          <label for="password">密码</label>
-          <input type="password"
-                 class="form-control"
-                 id="password"
-                 placeholder="请输入密码"
-                 v-model="password">
-        </div>
-        <div class="form-group">
-          <label for="confirmedPassword">确认密码</label>
-          <input type="password"
-                 class="form-control"
-                 id="confirmedPassword"
-                 placeholder="请再次输入密码"
-                 v-model="confirmedPassword">
-        </div>
-        <div class="error_message">{{ error_message }}</div>
-        <div class="button">
-          <input type="submit"
-                 class="btn btn-success"
-                 value="注  册" />
-        </div>
-      </form>
-    </div>
-  </ContentField>
+  <div class="loginForm">
+    <h2>用户注册</h2>
+    <form @submit.prevent="register">
+      <div class="form-group">
+        <label for="username">用户名</label>
+        <input type="text"
+               class="form-control"
+               id="username"
+               placeholder="请输入用户名"
+               v-model="username">
+      </div>
+      <div class="form-group">
+        <label for="password">密码</label>
+        <input type="password"
+               class="form-control"
+               id="password"
+               placeholder="请输入密码"
+               v-model="password">
+      </div>
+      <div class="form-group">
+        <label for="confirmedPassword">确认密码</label>
+        <input type="password"
+               class="form-control"
+               id="confirmedPassword"
+               placeholder="请再次输入密码"
+               v-model="confirmedPassword">
+      </div>
+      <div class="error_message">{{ error_message }}</div>
+      <div class="button">
+        <input type="submit"
+               class="btn btn-success"
+               value="注  册" />
+      </div>
+      <div style="text-align: center; margin-top: 10px;">
+        <router-link class="btn btn-link"
+                     :to="{name: 'user_account_login'}">已有账号？立即登录</router-link>
+      </div>
+    </form>
+  </div>
 </template>
 
 <script>
-import ContentField from '@/components/ContentField'
 import { ref } from 'vue'
 import router from '../../../router/index'
 import $ from 'jquery'
 
 export default {
-  components: {
-    ContentField
-  },
   setup() {
     let username = ref('');
     let password = ref('');
@@ -90,7 +88,7 @@ export default {
 <style scoped>
 .loginForm {
   /*边框高度*/
-  height: 360px;
+  height: 400px;
   /*边框宽度*/
   width: 500px;
   /*边框颜色*/
@@ -100,7 +98,7 @@ export default {
   /*阴影 水平方向，竖直方向，模糊距离*/
   box-shadow: 5px 5px 5px #4d4d4d;
   /*上边界距离*/
-  /* margin-top: 100px; */
+  margin-top: 180px;
   /*左边界距离：自动*/
   margin-left: auto;
   /*右边界距离：自动*/
