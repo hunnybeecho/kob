@@ -21,6 +21,7 @@ const routes = [
     name: 'home',
     component: HomeView,
     meta: {
+        title: '首页',
         requestAuth: false,
     }
   },
@@ -29,6 +30,7 @@ const routes = [
     name: 'pk_index',
     component: PkIndexView,
     meta: {
+        title: 'PK对战',
         requestAuth: true,
     }
   },
@@ -37,6 +39,7 @@ const routes = [
     name: 'record_index',
     component: RecordIndexView,
     meta: {
+        title: '对局记录',
         requestAuth: true,
     }
   },
@@ -45,6 +48,7 @@ const routes = [
     name: 'ranklist_index',
     component: RanklistIndexView,
     meta: {
+        title: '排行榜',
         requestAuth: true,
     }
   },
@@ -53,6 +57,7 @@ const routes = [
     name: 'user_bot_index',
     component: UserBotIndexView,
     meta: {
+        title: '我的Bot',
         requestAuth: true,
     }
   },
@@ -61,6 +66,7 @@ const routes = [
     name: 'user_account_profile',
     component: UserAccountProfileView,
     meta: {
+        title: '个人中心',
         requestAuth: true,
     }
   },
@@ -69,18 +75,20 @@ const routes = [
     name: '404',
     component: NotFound,
     meta: {
+        title: '404',
         requestAuth: false,
     }
   },
   {
     path: '/:catchAll(.*)',
-    redirect: '/404'
+    redirect: '/404',
   },
   {
     path: '/user/account/login',
     name: 'user_account_login',
     component: UserAccountLoginView,
     meta: {
+        title: '登录',
         requestAuth: false,
     }
   },
@@ -89,6 +97,7 @@ const routes = [
     name: 'user_account_register',
     component: UserAccountRegisterView,
     meta: {
+        title: '注册',
         requestAuth: false,
     }
   },
@@ -100,6 +109,11 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
+    // 路由发生变化修改页面title
+    if (to.meta.title) {
+        document.title = to.meta.title
+    }
+
     let flag = 1;
     const jwt_token = localStorage.getItem('jwt_token');
 

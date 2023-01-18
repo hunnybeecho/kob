@@ -1,9 +1,10 @@
 <template>
   <div class="loginForm">
-    <h2>用户注册</h2>
+    <h2 style="font-weight: bold;">用户注册</h2>
     <form @submit.prevent="register">
       <div class="form-group">
-        <label for="username">用户名</label>
+        <label for="username"
+               style="font-weight: bold;">用户名</label>
         <input type="text"
                class="form-control"
                id="username"
@@ -11,7 +12,8 @@
                v-model="username">
       </div>
       <div class="form-group">
-        <label for="password">密码</label>
+        <label for="password"
+               style="font-weight: bold;">密码</label>
         <input type="password"
                class="form-control"
                id="password"
@@ -19,7 +21,8 @@
                v-model="password">
       </div>
       <div class="form-group">
-        <label for="confirmedPassword">确认密码</label>
+        <label for="confirmedPassword"
+               style="font-weight: bold;">确认密码</label>
         <input type="password"
                class="form-control"
                id="confirmedPassword"
@@ -98,7 +101,7 @@ export default {
   /*阴影 水平方向，竖直方向，模糊距离*/
   box-shadow: 5px 5px 5px #4d4d4d;
   /*上边界距离*/
-  margin-top: 180px;
+  margin-top: 150px;
   /*左边界距离：自动*/
   margin-left: auto;
   /*右边界距离：自动*/
