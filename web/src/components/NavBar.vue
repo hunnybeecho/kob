@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
       <router-link class="navbar-brand"
-                   style="margin-right: 50px; font-size: 24px"
+                   style="margin-right: 50px; font-size: 26px"
                    :to="{name: 'default'}">蛇蛇大作战</router-link>
       <button class="navbar-toggler"
               type="button"

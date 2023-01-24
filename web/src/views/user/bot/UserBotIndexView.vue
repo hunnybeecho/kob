@@ -65,7 +65,7 @@
                       <div class="mb-3">
                         <label for="add-bot-code"
                                class="col-form-label">代码</label>
-                        <VAceEditor v-model:value="botadd.content"
+                        <VAceEditor v-model:value="botadd.code"
                                     @init="editorInit"
                                     lang="java"
                                     theme="textmate"
@@ -104,7 +104,7 @@
               <tbody class="table-group-divider">
                 <tr v-for="(bot, index) in bots"
                     :key="bot.id">
-                  <td style="text-align: center;">{{ index + 1 }}</td>
+                  <th style="text-align: center;">{{ index + 1 }}</th>
                   <td style="text-align: center;">{{ bot.title }}</td>
                   <td style="text-align: center;">{{ bot.description }}</td>
                   <td style="text-align: center;">{{ bot.createTime }}</td>
@@ -162,7 +162,7 @@
                             <div class="mb-3">
                               <label for="update-bot-code"
                                      class="col-form-label">代码</label>
-                              <VAceEditor v-model:value="bot.content"
+                              <VAceEditor v-model:value="bot.code"
                                           @init="editorInit"
                                           lang="java"
                                           theme="textmate"
@@ -248,7 +248,7 @@ export default {
     const botadd = reactive({
       title: "",
       description: "",
-      content: "",
+      code: "",
       error_message: ""
     });
 
@@ -273,7 +273,8 @@ export default {
     const clear_botadd_data = () => {
       botadd.title = "";
       botadd.description = "";
-      botadd.content = "";
+      botadd.code = "";
+      botadd.error_message = "";
     }
 
     const add_bot = () => {
@@ -284,7 +285,7 @@ export default {
         data: {
           title: botadd.title,
           description: botadd.description,
-          content: botadd.content,
+          code: botadd.code,
         },
         headers: {
           Authorization: "Bearer " + store.state.user.token,
@@ -338,7 +339,7 @@ export default {
           bot_id: bot.id,
           title: bot.title,
           description: bot.description,
-          content: bot.content,
+          code: bot.code,
         },
         headers: {
           Authorization: "Bearer " + store.state.user.token,

@@ -7,10 +7,17 @@
 import NavBar from './components/NavBar.vue'
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap/dist/js/bootstrap"
+import router from '@/router'
 
 export default {
+  name: 'App',
   components: {
     NavBar
+  },
+  created() {
+    if (router.path !== '/home') {
+      router.replace('/home')
+    }
   }
 }
 </script>

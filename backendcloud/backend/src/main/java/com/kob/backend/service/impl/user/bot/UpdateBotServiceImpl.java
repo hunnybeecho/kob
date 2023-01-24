@@ -25,7 +25,7 @@ public class UpdateBotServiceImpl implements UpdateBotService {
         Integer bot_id = Integer.parseInt(data.get("bot_id"));
         String title = data.get("title");
         String description = data.get("description");
-        String content = data.get("content");
+        String code = data.get("code");
 
         Map<String, String> map = new HashMap<>();
 
@@ -44,12 +44,12 @@ public class UpdateBotServiceImpl implements UpdateBotService {
             return map;
         }
 
-        if (content == null || content.length() == 0) {
+        if (code == null || code.length() == 0) {
             map.put("error_message", "代码不能为空");
             return map;
         }
 
-        if (content.length() > 10000) {
+        if (code.length() > 10000) {
             map.put("error_message", "代码长度不能超过10000");
             return map;
         }
@@ -71,7 +71,7 @@ public class UpdateBotServiceImpl implements UpdateBotService {
                 user.getId(),
                 title,
                 description,
-                content,
+                code,
                 bot.getCreateTime(),
                 new Date()
         );

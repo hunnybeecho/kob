@@ -8,7 +8,7 @@
       <div class="card">
         <div class="card-body">
           <div class="row">
-            <div class="col-6">
+            <div class="col-5">
               <div class="avatar">
                 <img :src="$store.state.user.avatar"
                      alt="用户头像">
@@ -17,7 +17,20 @@
                 {{ $store.state.user.username }}
               </div>
             </div>
-            <div class="col-6">
+            <div class="col-2">
+              <div class="user-select-bot">
+                <select v-model="selected_bot"
+                        class="form-select"
+                        aria-label="Default select example">
+                  <option value="-1"
+                          selected>亲自出马</option>
+                  <option v-for="bot in bots"
+                          :key="bot.id"
+                          :value="bot.id">{{ bot.title }}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-5">
               <div class="avatar">
                 <img :src="$store.state.pk.opponent_avatar"
                      alt="对手头像">
@@ -42,17 +55,21 @@
 <script>
 import { ref } from 'vue'
 import { useStore } from 'vuex'
+import $ from 'jquery'
 
 export default {
   setup() {
     const store = useStore();
     let match_btn_info = ref("开始匹配");
+    let bots = ref([]);
+    let selected_bot = ref("-1");
 
     const click_match_btn = () => {
       if (match_btn_info.value === "开始匹配") {
         match_btn_info.value = "取消";
         store.state.pk.socket.send(JSON.stringify({
           event: "start-matching",
+          bot_id: selected_bot.value,
         }));
       } else {
         match_btn_info.value = "开始匹配";
@@ -62,8 +79,28 @@ export default {
       }
     }
 
+    const refresh_bots = () => {
+      $.ajax({
+        url: "http://127.0.0.1:3000/user/bot/get-list",
+        type: "GET",
+        headers: {
+          Authorization: "Bearer " + store.state.user.token,
+        },
+        success(resp) {
+          bots.value = resp;
+        },
+        error(resp) {
+          console.log(resp);
+        }
+      })
+    }
+
+    refresh_bots();
+
     return {
       match_btn_info,
+      bots,
+      selected_bot,
       click_match_btn,
     }
   }
@@ -79,10 +116,11 @@ div.matchground {
 
 div.avatar {
   text-align: center;
+  padding-top: 5vh;
 }
 
 div.avatar > img {
-  width: 40%;
+  width: 50%;
   border-radius: 50%;
 }
 
@@ -106,5 +144,13 @@ div.username {
   --bd-callout-color: #997404;
   --bd-callout-bg: #fff3cd;
   --bd-callout-border: #ffe69c;
+}
+
+div.user-select-bot {
+  padding-top: 6vh;
+}
+
+div.user-select-bot > select {
+  margin: 0 auto;
 }
 </style>

@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/home/HomeView'
 import PkIndexView from '@/views/pk/PkIndexView'
 import RecordIndexView from '@/views/record/RecordIndexView'
+import RecordContentView from '@/views/record/RecordContentView'
 import RanklistIndexView from '@/views/ranklist/RanklistIndexView'
 import UserBotIndexView from '@/views/user/bot/UserBotIndexView'
 import UserAccountProfileView from '@/views/user/account/UserAccountProfileView'
@@ -40,6 +41,15 @@ const routes = [
     component: RecordIndexView,
     meta: {
         title: '对局记录',
+        requestAuth: true,
+    }
+  },
+  {
+    path: '/record/:recordId',
+    name: 'record_content',
+    component: RecordContentView,
+    meta: {
+        title: '对局回放',
         requestAuth: true,
     }
   },
