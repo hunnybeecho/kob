@@ -15,10 +15,8 @@ export default {
     NavBar
   },
   created() {
-    if (router.path !== '/home') {
-      router.replace('/home')
-    }
-  }
+    router.replace('/home')
+  },
 }
 </script>
 

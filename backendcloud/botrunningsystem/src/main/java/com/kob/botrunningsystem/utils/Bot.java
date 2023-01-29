@@ -3,10 +3,13 @@
  **/
 package com.kob.botrunningsystem.utils;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
-public class Bot implements com.kob.botrunningsystem.utils.BotInterface {
+public class Bot implements java.util.function.Supplier<Integer> {
     private static final int[] dx = {-1, 0, 1, 0}, dy = {0, 1, 0, -1};
     public static int INT = 0x3f3f3f3f;
     public static int[][] path;
@@ -48,7 +51,6 @@ public class Bot implements com.kob.botrunningsystem.utils.BotInterface {
         return res;
     }
 
-    @Override
     public Integer nextMove(String input) {
         String[] strs = input.split("#");
         for (int i = 0, k = 0; i < 13; i++) {
@@ -147,6 +149,17 @@ public class Bot implements com.kob.botrunningsystem.utils.BotInterface {
         return 0;
     }
 
+    @Override
+    public Integer get() {
+        File file = new File("input.txt");
+        try {
+            Scanner scanner = new Scanner(file);
+            return nextMove(scanner.next());
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static void floyd(int[][] matrix, Integer sources) {
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix.length; j++) {
@@ -213,15 +226,18 @@ public class Bot implements com.kob.botrunningsystem.utils.BotInterface {
     }
 }
 
-/**
- * 简单难度的AI
- **/
+/*
+  简单难度的AI
+ */
 //package com.kob.botrunningsystem.utils;
 //
+//import java.io.File;
+//import java.io.FileNotFoundException;
 //import java.util.ArrayList;
 //import java.util.List;
+//import java.util.Scanner;
 //
-//public class Bot implements com.kob.botrunningsystem.utils.BotInterface {
+//public class Bot implements java.util.function.Supplier<Integer> {
 //    static class Cell {
 //        public int x, y;
 //
@@ -256,7 +272,6 @@ public class Bot implements com.kob.botrunningsystem.utils.BotInterface {
 //        return res;
 //    }
 //
-//    @Override
 //    public Integer nextMove(String input) {
 //        String[] strs = input.split("#");
 //        int[][] g = new int[13][14];
@@ -287,6 +302,17 @@ public class Bot implements com.kob.botrunningsystem.utils.BotInterface {
 //        }
 //
 //        return 0;
+//    }
+//
+//    @Override
+//    public Integer get() {
+//        File file = new File("input.txt");
+//        try {
+//            Scanner scanner = new Scanner(file);
+//            return nextMove(scanner.next());
+//        } catch (FileNotFoundException e) {
+//            throw new RuntimeException(e);
+//        }
 //    }
 //}
 //

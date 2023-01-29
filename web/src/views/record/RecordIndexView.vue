@@ -2,7 +2,8 @@
   <ContentField>
     <div style="font-size: 20px; font-weight: bold;">对局记录</div>
     <table style="margin-top: 15px; text-align: center;"
-           class="table table-striped table-hover">
+           class="table table-striped table-hover"
+           v-if="records !== undefined && records !== null && records.length > 0">
       <thead>
         <tr>
           <th scope="col">序号</th>
@@ -67,7 +68,8 @@
         </tr>
       </tbody>
     </table>
-    <nav aria-label="Page navigation example">
+    <nav aria-label="Page navigation example"
+         v-if="records !== undefined && records !== null && records.length > 0">
       <ul class="pagination justify-content-end">
         <li class="page-item"
             @click="click_page(-2)">
@@ -92,6 +94,8 @@
         </li>
       </ul>
     </nav>
+    <div v-else
+         style="text-align: center">无数据</div>
   </ContentField>
 </template>
 
@@ -148,7 +152,8 @@ export default {
     const pull_page = page => {
       current_page = page;
       $.ajax({
-        url: "http://127.0.0.1:3000/record/get-list",
+        // url: "http://127.0.0.1:3000/record/get-list",
+        url: "https://app4553.acapp.acwing.com.cn/api/record/get-list",
         type: "GET",
         data: {
           page,
@@ -161,9 +166,9 @@ export default {
           total_records = resp.records_count;
           update_pages();
         },
-        error(resp) {
-          console.log(resp);
-        }
+        // error(resp) {
+        //   console.log(resp);
+        // }
       })
     };
 

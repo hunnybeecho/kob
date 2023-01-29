@@ -13,7 +13,7 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
-    @PostMapping("/user/account/login")
+    @PostMapping("/api/user/account/login")
     public Map<String, String> login(@RequestParam Map<String, String> data) {
         String username = data.get("username");
         String password = data.get("password");

@@ -14,7 +14,7 @@ public class UpdateBotController {
     @Autowired
     private UpdateBotService updateBotService;
 
-    @PostMapping("/user/bot/update")
+    @PostMapping("/api/user/bot/update")
     public Map<String, String> update(@RequestParam Map<String, String> data) {
         return updateBotService.update(data);
     }

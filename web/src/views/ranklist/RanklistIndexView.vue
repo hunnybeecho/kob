@@ -3,7 +3,8 @@
     <div style="font-size: 20px; font-weight: bold;">排行榜</div>
     <table id="tableId"
            style="margin-top: 15px; text-align: center;"
-           class="table table-striped table-hover">
+           class="table table-striped table-hover"
+           v-if="users !== undefined && users !== null && users.length > 0">
       <thead>
         <tr>
           <th scope="col">序号</th>
@@ -62,7 +63,8 @@
         </tr>
       </tbody>
     </table>
-    <nav aria-label="Page navigation example">
+    <nav aria-label="Page navigation example"
+         v-if="users !== undefined && users !== null && users.length > 0">
       <ul class="pagination justify-content-end">
         <li class="page-item"
             @click="click_page(-2)">
@@ -87,6 +89,8 @@
         </li>
       </ul>
     </nav>
+    <div v-else
+         style="text-align: center">无数据</div>
   </ContentField>
 </template>
 
@@ -142,7 +146,8 @@ export default {
     const pull_page = page => {
       current_page = page;
       $.ajax({
-        url: "http://127.0.0.1:3000/ranking/get-list",
+        // url: "http://127.0.0.1:3000/ranking/get-list",
+        url: "https://app4553.acapp.acwing.com.cn/api/ranking/get-list",
         type: "GET",
         data: {
           page,
@@ -155,9 +160,9 @@ export default {
           total_users = resp.users_count;
           update_pages();
         },
-        error(resp) {
-          console.log(resp);
-        }
+        // error(resp) {
+        //   console.log(resp);
+        // }
       })
     };
 

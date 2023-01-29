@@ -91,7 +91,7 @@
           </div>
           <div class="card-body">
             <table class="table table-striped table-hover"
-                   v-if="bots !==undefined &&bots != null && bots.length > 0">
+                   v-if="bots !== undefined && bots !== null && bots.length > 0">
               <thead>
                 <tr>
                   <th style="text-align: center;">序号</th>
@@ -167,7 +167,14 @@
                                           lang="java"
                                           theme="textmate"
                                           style="height: 300px"
-                                          :options="{ fontSize: 15 }" />
+                                          :options="{ 
+                                              fontSize: 15,
+                                              tabSize: 4,
+                                              enableBasicAutocompletion: true,
+                                              enableSnippets: true,
+                                              enableLiveAutocompletion: true,
+                                              highlightActiveLine: true,
+                                          }" />
                             </div>
                           </form>
                         </div>
@@ -242,6 +249,26 @@ export default {
       "basePath",
       "https://cdn.jsdelivr.net/npm/ace-builds@" + require('ace-builds').version + "/src-noconflict/")
 
+    function editorInit() {
+      require("ace-builds/src-noconflict/ext-language_tools");
+      require("ace-builds/src-noconflict/snippets/sql");
+      require("ace-builds/src-noconflict/snippets/c_cpp");
+      require("ace-builds/src-noconflict/snippets/java");
+      // require("ace-builds/src-noconflict/mode-sql");
+      require("ace-builds/src-noconflict/mode-c_cpp");
+      require("ace-builds/src-noconflict/mode-java");
+      //require("ace-builds/src-noconflict/theme-monokai");
+      require("ace-builds/src-noconflict/mode-html");
+      require("ace-builds/src-noconflict/mode-html_elixir");
+      require("ace-builds/src-noconflict/mode-html_ruby");
+      require("ace-builds/src-noconflict/mode-javascript");
+      require("ace-builds/src-noconflict/mode-python");
+      require("ace-builds/src-noconflict/snippets/less");
+      //require("ace-builds/src-noconflict/theme-chrome");
+      require("ace-builds/src-noconflict/ext-static_highlight");
+      require("ace-builds/src-noconflict/ext-beautify");
+    }
+
     const store = useStore();
     let bots = ref([]);
 
@@ -254,7 +281,8 @@ export default {
 
     const refresh_bots = () => {
       $.ajax({
-        url: "http://127.0.0.1:3000/user/bot/get-list",
+        // url: "http://127.0.0.1:3000/user/bot/get-list",
+        url: "https://app4553.acapp.acwing.com.cn/api/user/bot/get-list",
         type: "GET",
         headers: {
           Authorization: "Bearer " + store.state.user.token,
@@ -262,9 +290,9 @@ export default {
         success(resp) {
           bots.value = resp;
         },
-        error(resp) {
-          console.log(resp);
-        }
+        // error(resp) {
+        //   console.log(resp);
+        // }
       })
     }
 
@@ -280,7 +308,8 @@ export default {
     const add_bot = () => {
       botadd.error_message = "";
       $.ajax({
-        url: "http://127.0.0.1:3000/user/bot/add",
+        // url: "http://127.0.0.1:3000/user/bot/add",
+        url: "https://app4553.acapp.acwing.com.cn/api/user/bot/add",
         type: "POST",
         data: {
           title: botadd.title,
@@ -299,15 +328,16 @@ export default {
             botadd.error_message = resp.error_message;
           }
         },
-        error(resp) {
-          console.log(resp);
-        }
+        // error(resp) {
+        //   console.log(resp);
+        // }
       })
     }
 
     const remove_bot = (bot) => {
       $.ajax({
-        url: "http://127.0.0.1:3000/user/bot/remove",
+        // url: "http://127.0.0.1:3000/user/bot/remove",
+        url: "https://app4553.acapp.acwing.com.cn/api/user/bot/remove",
         type: "POST",
         data: {
           bot_id: bot.id,
@@ -324,16 +354,17 @@ export default {
             alert(resp.error_message);
           }
         },
-        error(resp) {
-          console.log(resp);
-        }
+        // error(resp) {
+        //   console.log(resp);
+        // }
       })
     }
 
     const update_bot = (bot) => {
       botadd.error_message = "";
       $.ajax({
-        url: "http://127.0.0.1:3000/user/bot/update",
+        // url: "http://127.0.0.1:3000/user/bot/update",
+        url: "https://app4553.acapp.acwing.com.cn/api/user/bot/update",
         type: "POST",
         data: {
           bot_id: bot.id,
@@ -352,15 +383,16 @@ export default {
             bot.error_message = resp.error_message;
           }
         },
-        error(resp) {
-          console.log(resp);
-        }
+        // error(resp) {
+        //   console.log(resp);
+        // }
       })
     }
 
     return {
       bots,
       botadd,
+      editorInit,
       refresh_bots,
       clear_botadd_data,
       add_bot,

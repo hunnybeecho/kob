@@ -77,7 +77,7 @@ export default {
               router.push({ name: "home" });
             },
             error() {
-              error_message.value = "服务器出错!";
+              error_message.value = "服务器异常!";
             }
           });
         },
