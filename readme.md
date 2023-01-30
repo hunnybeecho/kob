@@ -6,7 +6,7 @@
 * 前端
   * Vue3
   * Bootstrap
-  * Ajax
+  * JQuery
 * 后端
   * SpringBoot
   * SpringCloud
