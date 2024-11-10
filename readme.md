@@ -13,5 +13,3 @@
   * SpringSecurity
   * MyBatisPlus
   * Nginx
-***
-P.S. 该项目还在持续更新和维护
